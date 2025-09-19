@@ -1,22 +1,21 @@
 import { useNavigate } from "react-router";
 import { usePopularMovie } from "../../hooks/movie/usePopular";
+import MovieComponent from "../../components/movie";
 
 const HomeScreen = () => {
   const navigate = useNavigate();
   const { popularMovie } = usePopularMovie();
 
   return (
-    <div className="h-screen flex justify-center items-center">
-      <button
-        className="bg-black text-white cursor-pointer p-10 rounded-2xl"
-        onClick={() =>
-          navigate("/detail", {
-            state: { id: "sdadfaf" },
-          })
-        }
-      >
-        GOOOOO!
-      </button>
+    <div className="w-full px-10">
+      <div className="flex w-full flex-col">
+        <h1 className="text-2xl font-bold">Popular</h1>
+        <div className="flex flex-row gap-5 py-5 overflow-x-auto">
+          {popularMovie.map((movie) => (
+            <MovieComponent key={movie.id} movie={movie} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ interface Props {
   children: React.ReactNode;
   shadow?: boolean;
   width?: string;
+  className?: string;
 }
 
 export const Card = ({
@@ -11,15 +12,7 @@ export const Card = ({
   border,
   children,
   shadow = true,
-  width,
+  className = "",
 }: Props) => {
-  return (
-    <div
-      className={`bg-[${color}] rounded-[${border}] ${width}  ${
-        shadow ? "shadow" : ""
-      }`}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`w-52`}>{children}</div>;
 };

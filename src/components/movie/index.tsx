@@ -1,14 +1,5 @@
-import React from "react";
+import type { Movie } from "../../services/movie";
 import { Card } from "../card";
-
-interface Movie {
-  date: string;
-  title: string;
-  duration: string;
-  rating: number;
-  genre: string[];
-  img: string;
-}
 
 interface Props {
   movie: Movie;
@@ -16,13 +7,15 @@ interface Props {
 
 const MovieComponent = ({ movie }: Props) => {
   //Destructuring an Object
-  const { title, img } = movie;
+  const { title, poster_path } = movie;
 
   return (
-    <Card color="#ffffff" border="10px">
-      <img src={img} alt="Poster Movie" />
-      <p>{title}</p>
-    </Card>
+    <div className="w-[350px] h-[316px]">
+      <img
+        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        alt="Poster Movie"
+      />
+    </div>
   );
 };
 
