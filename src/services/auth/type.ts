@@ -9,3 +9,8 @@ export interface AuthResponse {
   gender: string;
   image: string;
 }
+
+export interface RefreshToken {
+  accessToken: string;
+  refreshToken: string;
+}
