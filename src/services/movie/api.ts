@@ -12,3 +12,15 @@ export const getPopular = async () => {
     console.error(error);
   }
 };
+
+export const getDetail = async (id: string) => {
+  try {
+    const response = await API.get(`movie/${id}`);
+
+    if (response.status === 200) {
+      return response.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};

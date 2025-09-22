@@ -8,9 +8,9 @@ const HomeScreen = () => {
 
   return (
     <div className="w-full px-10">
-      <div className="flex w-full flex-col">
+      <div className="flex flex-col py-10">
         <h1 className="text-2xl font-bold">Popular</h1>
-        <div className="flex flex-row gap-5 py-5 overflow-x-auto">
+        <div className="flex gap-3 overflow-x-auto overflow-visible px-10 mt-5">
           {popularMovie.map((movie) => (
             <MovieComponent key={movie.id} movie={movie} />
           ))}

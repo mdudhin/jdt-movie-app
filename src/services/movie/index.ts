@@ -1,5 +1,5 @@
 import type { Movie, ResponseData } from "./type";
-import { getPopular } from "./api";
+import { getPopular, getDetail } from "./api";
 
-export { getPopular };
+export { getPopular, getDetail };
 export type { Movie, ResponseData };
