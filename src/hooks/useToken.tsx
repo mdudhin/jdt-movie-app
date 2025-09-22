@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -96,6 +97,7 @@ export const TokenProvider = ({ children }: Readonly<Props>) => {
 
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
+      window.location.href = "/";
     } else {
       localStorage.removeItem("user");
     }
@@ -104,6 +106,7 @@ export const TokenProvider = ({ children }: Readonly<Props>) => {
   const logout = useCallback(() => {
     if (user) {
       localStorage.clear();
+      window.location.href = "/login";
     }
   }, [user]);
 
@@ -115,6 +118,12 @@ export const TokenProvider = ({ children }: Readonly<Props>) => {
     }),
     [user, changeUser, logout]
   );
+
+  useEffect(() => {
+    if (user) {
+      setAxiosConfig(user?.accessToken);
+    }
+  }, [user]);
 
   return (
     <TokenContext.Provider value={tokenContextValue}>

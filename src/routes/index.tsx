@@ -3,23 +3,29 @@ import HomeScreen from "../features/home";
 import DetailScreen from "../features/detail";
 import Layout from "../components/layout";
 import Login from "../features/login";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 export const routes = createBrowserRouter([
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/",
-    element: <Layout />,
+    element: <ProtectedRoutes />,
     children: [
       {
-        element: <HomeScreen />,
-        index: true,
+        path: "/login",
+        element: <Login />,
       },
       {
-        element: <DetailScreen />,
-        path: "/detail",
+        path: "/",
+        element: <Layout />,
+        children: [
+          {
+            element: <HomeScreen />,
+            index: true,
+          },
+          {
+            element: <DetailScreen />,
+            path: "/detail",
+          },
+        ],
       },
     ],
   },

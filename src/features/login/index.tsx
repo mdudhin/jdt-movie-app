@@ -4,8 +4,10 @@ import { loginSchema, type LoginSchema } from "../../services/auth/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../components/input";
 import { postAuth } from "../../services/auth/api";
+import { useToken } from "../../hooks/useToken";
 
 const Login = () => {
+  const { changeUser } = useToken();
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
@@ -17,7 +19,16 @@ const Login = () => {
     try {
       const response = await postAuth(data);
 
-      console.log(response);
+      if (response) {
+        const user = {
+          accessToken: response?.accessToken,
+          refreshToken: response?.refreshToken,
+          username: response?.username,
+          email: response?.email,
+          image: response?.image,
+        };
+        changeUser(user);
+      }
     } catch (error) {
       console.error(error);
     }
