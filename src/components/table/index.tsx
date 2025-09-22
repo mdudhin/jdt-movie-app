@@ -199,8 +199,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
                 <TableCell key={colIndex} className={column.cellClassName}>
                   {column.render
                     ? column.render(row[column.accessor], row)
-                    : row[column.accessor]
-                  }
+                    : row[column.accessor]}
                 </TableCell>
               ))}
             </TableRow>
