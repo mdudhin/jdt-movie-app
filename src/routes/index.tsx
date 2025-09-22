@@ -4,6 +4,7 @@ import DetailScreen from "../features/detail";
 import Layout from "../components/layout";
 import Login from "../features/login";
 import ProtectedRoutes from "./ProtectedRoutes";
+import ProductScreen from "../features/product";
 
 export const routes = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const routes = createBrowserRouter([
           {
             element: <DetailScreen />,
             path: "/detail",
+          },
+          {
+            element: <ProductScreen />,
+            path: "/product",
           },
         ],
       },
