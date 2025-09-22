@@ -47,7 +47,7 @@ const CustomFormField = <T extends FieldValues>(
           )}
           <FormControl>{children(field)}</FormControl>
           {description && <FormDescription>{description}</FormDescription>}
-          <FormMessage />
+          <FormMessage className="text-red-700" />
         </FormItem>
       )}
     />

@@ -1,11 +1,13 @@
 import API from "../api";
+import type { LoginSchema } from "./form";
+import type { AuthResponse } from "./type";
 
-export const postAuth = async (data: any) => {
+export const postAuth = async (data: LoginSchema) => {
   try {
-    const response = await API("https://dummyjson.com/auth/login");
+    const response = await API.post("https://dummyjson.com/auth/login", data);
 
     if (response.status === 200) {
-      console.log(response);
+      return response.data as AuthResponse;
     }
   } catch (error) {
     console.error(error);

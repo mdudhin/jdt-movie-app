@@ -1,20 +1,57 @@
-const Login = () => {
-  return (
-    <div className="flex flex-col h-screen justify-center items-center gap-5">
-      <input
-        className="border border-black rounded-md py-2 px-5"
-        placeholder="Email"
-      />
-      <input
-        className="border border-black rounded-md py-2 px-5"
-        placeholder="Password"
-        type="password"
-      />
+import { useForm } from "react-hook-form";
+import { CustomFormField, Form } from "../../components/form";
+import { loginSchema, type LoginSchema } from "../../services/auth/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "../../components/input";
+import { postAuth } from "../../services/auth/api";
 
-      <button className="bg-black text-white py-2 px-5 rounded-md cursor-pointer">
-        Login
-      </button>
-    </div>
+const Login = () => {
+  const form = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+  });
+
+  const { handleSubmit, control } = form;
+
+  const onSubmit = async (data: LoginSchema) => {
+    try {
+      const response = await postAuth(data);
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <Form {...form}>
+      <form
+        className="flex flex-col h-screen justify-center items-center gap-5"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <CustomFormField<LoginSchema>
+          control={control}
+          name="username"
+          label="Username"
+        >
+          {(field) => <Input {...field} placeholder="Username" type="text" />}
+        </CustomFormField>
+
+        <CustomFormField<LoginSchema>
+          control={control}
+          name="password"
+          label="Password"
+        >
+          {(field) => (
+            <Input {...field} placeholder="Password" type="password" />
+          )}
+        </CustomFormField>
+
+        <button className="bg-black text-white py-2 px-5 rounded-md cursor-pointer">
+          Login
+        </button>
+      </form>
+    </Form>
   );
 };
 
